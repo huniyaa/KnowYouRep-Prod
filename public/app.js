@@ -342,7 +342,7 @@ const PROTOTYPE_MP  = "Rechie Valdez";
 function showPoliticianModalWithData(politician) {
   // Prototype hook — redirect this MP to the ProtoPie demo
   if (politician.name === PROTOTYPE_MP) {
-    window.open(PROTOPIE_URL, "_blank", "noopener,noreferrer");
+    window.location.href = PROTOPIE_URL;
     return;
   }
 
