@@ -37,24 +37,7 @@ let map;
 
 
   
-async function init() {
-  // Initialize scroll animation
-  initScrollAnimation();  // <-- MAKE SURE THIS IS HERE
-  
-  map = initMap();
-  if (modal) modal.style.display = 'none';
-  
-  try {
-    const res = await fetch("/api/politicians?limit=400");
-    const data = await res.json();
-    allReps = data.politicians || [];
-    console.log(`Loaded ${allReps.length} politicians for autocomplete`);
-  } catch (error) {
-    console.error("Failed to load initial data:", error);
-  }
-  
-  fetchPoliticians();
-}
+// (duplicate init removed)
 
 // ─── Initialize Map ───────────────────────────────────────────────────────────
 function initMap() {
