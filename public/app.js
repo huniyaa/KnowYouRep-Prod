@@ -235,8 +235,8 @@ async function fetchPoliticians(query = "", province = "", offset = 0) {
     updateMapMarkers(politicians);
     renderPagination();
 
-    // Auto-trigger Rechie Valdez on initial page load (no query, no province, first page)
-    if (!query && !province && offset === 0) {
+    // Auto-trigger Rechie Valdez on initial page load
+    if (query === PROTOTYPE_MP && !province && offset === 0) {
       const rechie = politicians.find(p => p.name === PROTOTYPE_MP);
       if (rechie) {
         // Small delay so the card is in the DOM and the user sees it highlighted first
@@ -550,7 +550,10 @@ async function init() {
     console.error("Failed to load initial data:", error);
   }
   
-  fetchPoliticians();
+  // Pre-fill search with prototype MP
+  if (searchInput) searchInput.value = PROTOTYPE_MP;
+  currentQuery = PROTOTYPE_MP;
+  fetchPoliticians(PROTOTYPE_MP);
 }
 
 if (document.readyState === 'loading') {
