@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Know Your Rep - Canadian Politicians</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Simple Header - No scroll effects -->
+  <header class="main-header">
+    <h1>Know <span class="accent">Your</span> Rep</h1>
+    <p>Discover your local political representatives beyond party lines</p>
+  </header>
+
+  <!-- Controls -->
+  <div id="controls">
+    <div id="search-wrapper">
+      <input type="text" id="search" placeholder="Search by name or district…" autocomplete="off" />
+      <ul id="dropdown" hidden></ul>
+    </div>
+    <select id="province-filter">
+      <option value="">All provinces</option>
+      <option value="AB">Alberta</option>
+      <option value="BC">British Columbia</option>
+      <option value="MB">Manitoba</option>
+      <option value="NB">New Brunswick</option>
+      <option value="NL">Newfoundland and Labrador</option>
+      <option value="NS">Nova Scotia</option>
+      <option value="NT">Northwest Territories</option>
+      <option value="NU">Nunavut</option>
+      <option value="ON">Ontario</option>
+      <option value="PE">Prince Edward Island</option>
+      <option value="QC">Quebec</option>
+      <option value="SK">Saskatchewan</option>
+      <option value="YT">Yukon</option>
+    </select>
+    <button id="use-location" class="location-btn">
+      <i class="fas fa-location-dot"></i> My Location
+    </button>
+  </div>
+
+  <div id="status"></div>
+
+  <!-- Main Layout: Map + Side Panel -->
+  <div class="main-layout">
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+    <div class="side-panel">
+      <div class="panel-header">
+        <h3><i class="fas fa-user-friends"></i> Representatives</h3>
+        <button id="clear-results-btn" class="clear-btn" style="display: none;">
+          <i class="fas fa-times"></i> Clear
+        </button>
+      </div>
+      <div id="results" class="results-list"></div>
+      <div id="pagination" class="panel-pagination"></div>
+      <div id="panel-empty" class="panel-empty">
+        <i class="fas fa-search"></i>
+        <p>Search by name or district, or click on a map marker</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Politician Detail Modal -->
+  <div id="politician-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div id="modal-politician-photo"></div>
+        <h2 id="modal-name"></h2>
+        <button id="close-modal" class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong><i class="fas fa-tag"></i> Party:</strong> <span id="modal-party"></span></p>
+        <p><strong><i class="fas fa-map-marker-alt"></i> District:</strong> <span id="modal-district"></span></p>
+        <p><strong><i class="fas fa-calendar-alt"></i> Province:</strong> <span id="modal-province"></span></p>
+        <div class="quotes-section">
+          <h4><i class="fas fa-quote-left"></i> Recent Statement</h4>
+          <div id="modal-quotes-text"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="modal-learn-more" target="_blank" rel="noopener noreferrer" class="learn-more-btn">
+          <i class="fas fa-external-link-alt"></i> Learn more on OpenParliament
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="ridingCoords.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
