@@ -235,14 +235,6 @@ async function fetchPoliticians(query = "", province = "", offset = 0) {
     updateMapMarkers(politicians);
     renderPagination();
 
-    // Auto-trigger Rechie Valdez on initial page load
-    if (query === PROTOTYPE_MP && !province && offset === 0) {
-      const rechie = politicians.find(p => p.name === PROTOTYPE_MP);
-      if (rechie) {
-        // Small delay so the card is in the DOM and the user sees it highlighted first
-        setTimeout(() => showPoliticianModalWithData(rechie), 600);
-      }
-    }
     
   } catch (err) {
     console.error(err);
