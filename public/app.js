@@ -234,6 +234,15 @@ async function fetchPoliticians(query = "", province = "", offset = 0) {
     displayResults(politicians);
     updateMapMarkers(politicians);
     renderPagination();
+
+    // Auto-trigger Rechie Valdez on initial page load (no query, no province, first page)
+    if (!query && !province && offset === 0) {
+      const rechie = politicians.find(p => p.name === PROTOTYPE_MP);
+      if (rechie) {
+        // Small delay so the card is in the DOM and the user sees it highlighted first
+        setTimeout(() => showPoliticianModalWithData(rechie), 600);
+      }
+    }
     
   } catch (err) {
     console.error(err);
@@ -352,7 +361,16 @@ function renderPagination() {
 }
 
 // ─── Modal Functions ──────────────────────────────────────────────────────────
+const PROTOPIE_URL = "https://sheridan.protopie.cloud/p/8a96ab947906b4da0b76dbc4";
+const PROTOTYPE_MP  = "Rechie Valdez";
+
 function showPoliticianModalWithData(politician) {
+  // Prototype hook — redirect this MP to the ProtoPie demo
+  if (politician.name === PROTOTYPE_MP) {
+    window.open(PROTOPIE_URL, "_blank", "noopener,noreferrer");
+    return;
+  }
+
   const name = politician.name;
   const party = politician.party;
   const district = politician.district;
